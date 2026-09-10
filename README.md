@@ -4,13 +4,17 @@
 
 ## 目前進度
 
-V0.2 已完成四頁 KiCad 原理圖草案、接線核對及輸入／LC 區塊模擬。暫定外接 48V 與 12V、雙聲道 BTL，以 2×50W / 8Ω 為第一階段目標。尚無 PCB、加工圖或實測；手動控制及 LC 仍待下一版完善。
+V0.3 已加入 **XLR 平衡輸入並保留 RCA**，搭配濾波後回授（PFFB）、四顆 Coilcraft MA5172-AE，以及隔離 Trigger、自動啟停與 48V 功率電源開關。八頁 KiCad 原理圖及簡化模型已檢查。以 2×50W / 8Ω 為第一階段目標；尚無 PCB 或實測。
+
+XLR 使用 INA2137 差動接收器，依 Z10 的 XLR／RCA 電平匹配音量。第一版由左右聲道跳線選擇輸入，切換前先進入待機。
+
+Trigger 關機會進入待機：功率級 48V 關閉，外部電源與 12V 待機／類比支路仍有電。Z10 Trigger 的電壓、極性與帶載能力須在實機階段確認。
 
 ## 電路圖
 
-![V0.2 RCA 輸入級](electrical/preview/tpa3255-v02-input.png)
+![V0.3 XLR 平衡輸入與 RCA 選擇](electrical/v03/preview/tpa3255-v03-xlr-input.png)
 
-**[查看全部四頁原理圖](electrical/README.md)** · [下載 PDF](electrical/preview/tpa3255-v02.pdf) · [中文設計說明](docs/V0.2_電路設計.md) · [驗證報告](electrical/validation.md)
+**[查看 V0.3 八頁原理圖](electrical/v03/README.md)** · [放大 XLR 圖](electrical/v03/preview/tpa3255-v03-xlr-input.svg) · [下載 PDF](electrical/v03/preview/tpa3255-v03.pdf) · [中文設計說明](docs/V0.3_設計說明.md) · [驗證報告](electrical/v03/validation.md)
 
 ## 機殼空間預覽
 
@@ -24,9 +28,11 @@ V0.2 已完成四頁 KiCad 原理圖草案、接線核對及輸入／LC 區塊�
 
 | 文件 | 用途 |
 |---|---|
-| [V0.2 電路設計](docs/V0.2_電路設計.md) | 供電、輸入級、控制與待確認事項 |
+| [V0.3 電路設計](docs/V0.3_設計說明.md) | 電感選型、回授、Z10 匹配與 Trigger 啟停 |
+| [PCB 設計要求](docs/V0.3_PCB設計要求.md) | 供電、接地、取樣與元件配置要求 |
+| [V0.2 電路設計](docs/V0.2_電路設計.md) | 歷史基線：手動控制、未加 PFFB |
 | [音質改善評估](docs/V0.2_音質改善評估.md) | 回授、電感、供電與輸入級的改善優先順序 |
-| [BOM 草案](electrical/bom-draft.csv) | 由原理圖匯出，料號／footprint 待選 |
+| [BOM 草案](electrical/v03/bom-draft.csv) | V0.3 實際元件；部分料號／全部 footprint 待選 |
 | [V0.1 設計規格](docs/V0.1_設計規格.md) | 系統、選材條件與測試流程 |
 | [電路設計筆記](docs/01_電路設計.md) | 已修正的腳位、供電與設計注意事項 |
 | [功率估算](docs/V0.1_功率估算.md) | 可重算的需求情境 |
@@ -36,7 +42,7 @@ V0.2 已完成四頁 KiCad 原理圖草案、接線核對及輸入／LC 區塊�
 
 ## 下一步
 
-依音質改善評估，先比較濾波後回授（PFFB）與 LC 組合，再決定輸入增益；加入自動電源監測與啟停，完成電源輸入保護及元件選型，再確定 footprint、板形和散熱器。
+完成回授穩定性、真實運放與電源開關的進一步驗證，核對 Trigger 介面、剩餘料件及封裝，再依 PCB 設計要求確定板形、佈局和散熱器。
 
 重新產生計算報告：
 

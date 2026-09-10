@@ -1,0 +1,143 @@
+V0.3 REDUCED AC model - not TPA3255 PWM or hardware stability proof
+* Ideal opamps (A0=1e6), ideal VMID; no noise, clipping or real opamp BW.
+* INA2137: nominal internal 12k/6k network, not manufacturer semiconductor model.
+* Common-mode mismatch: external R +/-0.1%, paired C +/-0.5%; internal ratios ideal.
+* TPA gain is a typical constant; 100kHz pole case is an arbitrary sensitivity study.
+VMID n100 0 DC 6
+V12 n0 0 DC 12
+VL n46 0 DC 0 AC 0
+VLH n54 0 DC 0 AC 0.5
+VLC n53 0 DC 0 AC 0.5 180
+VSELECT_L n51 n52 0
+RRX_LP n48 rx_Lp 12k
+RRX_LREF n50 rx_Lp 6k
+RRX_LN n47 rx_Ln 12k
+RRX_LFB n49 rx_Ln 6k
+ERX_L n49 n100 rx_Lp rx_Ln 1e6
+VR n75 0 DC 0 AC 0
+VRH n83 0 DC 0 AC 0.5
+VRC n82 0 DC 0 AC 0.5 180
+VSELECT_R n80 n81 0
+RRX_RP n77 rx_Rp 12k
+RRX_RREF n79 rx_Rp 6k
+RRX_RN n76 rx_Rn 12k
+RRX_RFB n78 rx_Rn 6k
+ERX_R n78 n100 rx_Rp rx_Rn 1e6
+C1 n11 n62 3.3e-08
+C10 n87 0 1e-09
+C101 n51 n55 1e-05
+C102 n57 n44 3.3e-10
+C103 n58 n45 3.3e-10
+C11 n88 0 1e-09
+C12 n89 0 1e-09
+C121 n80 n56 1e-05
+C122 n59 n73 3.3e-10
+C123 n60 n74 3.3e-10
+C13 n86 n101 2.2e-07
+C14 n87 n102 2.2e-07
+C15 n88 n103 2.2e-07
+C150 n90 n38 1e-05
+C151 n91 n39 1e-05
+C152 n92 n40 1e-05
+C153 n93 n41 1e-05
+C154 n38 0 1e-10
+C155 n39 0 1e-10
+C156 n40 0 1e-10
+C157 n41 0 1e-10
+C16 n89 n104 2.2e-07
+C2 n12 n63 3.3e-08
+C3 n13 n64 3.3e-08
+C4 n14 n65 3.3e-08
+C5 n86 0 1e-06
+C501 n90 n29 2.2e-10
+C502 n91 n30 2.2e-10
+C503 n92 n31 2.2e-10
+C504 n93 n32 2.2e-10
+C505 n29 n86 2.2e-10
+C506 n30 n87 2.2e-10
+C507 n31 n88 2.2e-10
+C508 n32 n89 2.2e-10
+C6 n87 0 1e-06
+C601 n43 n48 4.7e-05
+C602 n42 n47 4.7e-05
+C603 n72 n77 4.7e-05
+C604 n71 n76 4.7e-05
+C605 n49 n52 4.7e-05
+C606 n78 n81 4.7e-05
+C607 n2 0 1e-07
+C608 n2 0 1e-07
+C609 n2 0 0.0001
+C7 n88 0 1e-06
+C8 n89 0 1e-06
+C9 n86 0 1e-09
+L1 n62 n86 1e-05
+L2 n63 n87 1e-05
+L3 n64 n88 1e-05
+L4 n65 n89 1e-05
+R1 n101 0 1
+R101 n46 0 100000
+R102 n55 n57 11500
+R103 n57 n44 10000
+R104 n44 n58 10000
+R105 n58 n45 10000
+R121 n75 0 100000
+R122 n56 n59 11500
+R123 n59 n73 10000
+R124 n73 n60 10000
+R125 n60 n74 10000
+R150 n44 n90 2700
+R151 n45 n91 2700
+R152 n73 n92 2700
+R153 n74 n93 2700
+R2 n102 0 1
+R3 n103 0 1
+R4 n104 0 1
+R501 n90 n86 33000
+R502 n91 n87 33000
+R503 n92 n88 33000
+R504 n93 n89 33000
+R505 n29 0 10000
+R506 n30 0 10000
+R507 n31 0 10000
+R508 n32 0 10000
+R601 n54 n43 47
+R602 n53 n42 47
+R603 n83 n72 47
+R604 n82 n71 47
+R605 n52 0 100000
+R606 n81 0 100000
+R607 n0 n2 10
+R608 n15 0 0
+EU2A n44 n100 n100 n57 1e6
+EU2B n45 n100 n100 n58 1e6
+EU3A n73 n100 n100 n59 1e6
+EU3B n74 n100 n100 n60 1e6
+EU602A n50 n100 n100 n50 1e6
+EU602B n79 n100 n100 n79 1e6
+RINPUT_A n38 0 20k
+ERAW_A raw_A 0 n38 0 -11.8850222744
+RDCR_A raw_A n62 0.026
+RINPUT_B n39 0 20k
+ERAW_B raw_B 0 n39 0 -11.8850222744
+RDCR_B raw_B n63 0.026
+RINPUT_C n40 0 20k
+ERAW_C raw_C 0 n40 0 -11.8850222744
+RDCR_C raw_C n64 0.026
+RINPUT_D n41 0 20k
+ERAW_D raw_D 0 n41 0 -11.8850222744
+RDCR_D raw_D n65 0.026
+RLOAD_L n86 n87 1000000000.0
+RLOAD_R n88 n89 1000000000.0
+.control
+set wr_singlescale
+set wr_vecnames
+set numdgt=12
+ac dec 200 1 1000000
+let left = v(n86)-v(n87)
+let right = v(n88)-v(n89)
+let opneg = v(n44)
+let oppos = v(n45)
+wrdata ac-xlr-open-pole0.dat left right opneg oppos
+quit
+.endc
+.end
