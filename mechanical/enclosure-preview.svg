@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+<title>TPA3255 V0.1 機殼空間配置草案</title>
+<desc>左側為開蓋斜視示意，右側為俯視配置。灰色為機殼，綠色為 PCB 占位，橘色為散熱器占位。尚未完成電路、固定孔及熱設計。</desc>
+<rect width="1200" height="700" fill="#f4f6fa"/>
+<g font-family="Noto Sans CJK TC, sans-serif" fill="#172b46">
+<text x="48" y="57" font-size="30" fill="#172b46">TPA3255 / V0.1 機殼空間配置</text>
+<text x="48" y="91" font-size="18" fill="#52647a">外接電源方案 · 機殼、PCB 與散熱空間的第一版假設</text>
+<rect x="40" y="120" width="620" height="355" fill="#ffffff" stroke="none" fill-opacity="1"/>
+<rect x="680" y="120" width="480" height="355" fill="#ffffff" stroke="none" fill-opacity="1"/>
+<text x="64" y="155" font-size="21" fill="#172b46">01  開蓋斜視示意</text>
+<text x="704" y="155" font-size="21" fill="#172b46">02  俯視配置</text>
+<polygon points="310.00,260.00 552.00,370.00 552.00,366.80 310.00,256.80" fill="#d7e0e9" fill-opacity="0.7" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="310.00,260.00 166.00,324.80 166.00,321.60 310.00,256.80" fill="#d7e0e9" fill-opacity="0.7" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="552.00,370.00 408.00,434.80 408.00,431.60 552.00,366.80" fill="#d7e0e9" fill-opacity="0.7" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="166.00,324.80 408.00,434.80 408.00,431.60 166.00,321.60" fill="#d7e0e9" fill-opacity="0.7" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="310.00,256.80 552.00,366.80 408.00,431.60 166.00,321.60" fill="#d7e0e9" fill-opacity="0.7" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="310.00,256.80 552.00,366.80 552.00,258.00 310.00,148.00" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="310.00,256.80 308.40,257.52 308.40,148.72 310.00,148.00" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="552.00,366.80 550.40,367.52 550.40,258.72 552.00,258.00" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="308.40,257.52 550.40,367.52 550.40,258.72 308.40,148.72" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="310.00,148.00 552.00,258.00 550.40,258.72 308.40,148.72" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="308.40,257.52 310.60,258.52 310.60,149.72 308.40,148.72" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="308.40,257.52 167.60,320.88 167.60,212.08 308.40,148.72" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="310.60,258.52 169.80,321.88 169.80,213.08 310.60,149.72" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="167.60,320.88 169.80,321.88 169.80,213.08 167.60,212.08" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="308.40,148.72 310.60,149.72 169.80,213.08 167.60,212.08" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="322.00,278.40 476.00,348.40 476.00,345.84 322.00,275.84" fill="#23a17b" fill-opacity="0.9" stroke="#137256" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="322.00,278.40 242.00,314.40 242.00,311.84 322.00,275.84" fill="#23a17b" fill-opacity="0.9" stroke="#137256" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="476.00,348.40 396.00,384.40 396.00,381.84 476.00,345.84" fill="#23a17b" fill-opacity="0.9" stroke="#137256" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="242.00,314.40 396.00,384.40 396.00,381.84 242.00,311.84" fill="#23a17b" fill-opacity="0.9" stroke="#137256" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="322.00,275.84 476.00,345.84 396.00,381.84 242.00,311.84" fill="#23a17b" fill-opacity="0.9" stroke="#137256" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="339.00,287.80 427.00,327.80 427.00,271.80 339.00,231.80" fill="#efab57" fill-opacity="0.85" stroke="#986120" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="339.00,287.80 291.00,309.40 291.00,253.40 339.00,231.80" fill="#efab57" fill-opacity="0.85" stroke="#986120" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="427.00,327.80 379.00,349.40 379.00,293.40 427.00,271.80" fill="#efab57" fill-opacity="0.85" stroke="#986120" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="291.00,309.40 379.00,349.40 379.00,293.40 291.00,253.40" fill="#efab57" fill-opacity="0.85" stroke="#986120" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="339.00,231.80 427.00,271.80 379.00,293.40 291.00,253.40" fill="#efab57" fill-opacity="0.85" stroke="#986120" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="548.20,366.52 550.40,367.52 550.40,258.72 548.20,257.72" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="548.20,366.52 407.40,429.88 407.40,321.08 548.20,257.72" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="550.40,367.52 409.60,430.88 409.60,322.08 550.40,258.72" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="407.40,429.88 409.60,430.88 409.60,322.08 407.40,321.08" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="548.20,257.72 550.40,258.72 409.60,322.08 407.40,321.08" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="167.60,320.88 409.60,430.88 409.60,322.08 167.60,212.08" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="167.60,320.88 166.00,321.60 166.00,212.80 167.60,212.08" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="409.60,430.88 408.00,431.60 408.00,322.80 409.60,322.08" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="166.00,321.60 408.00,431.60 408.00,322.80 166.00,212.80" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<polygon points="167.60,212.08 409.60,322.08 408.00,322.80 166.00,212.80" fill="#b5c6d5" fill-opacity="0.1" stroke="#64748b" stroke-width="1.2" stroke-linejoin="round"/>
+<text x="75" y="452" font-size="18" fill="#172b46">外形 220 × 180 × 70 mm；壁厚 2 mm</text>
+<rect x="760" y="188" width="268.8888888888889" height="220.00000000000003" fill="#d7e0e9" stroke="#64748b" fill-opacity="1"/>
+<rect x="762.4444444444445" y="190.44444444444446" width="264.0" height="215.11111111111114" fill="#f8fafc" stroke="#94a3b8" fill-opacity="1"/>
+<rect x="808.8888888888889" y="236.88888888888889" width="171.11111111111111" height="122.22222222222223" fill="#b6e7d8" stroke="#137256" fill-opacity="1"/>
+<rect x="845.5555555555555" y="261.33333333333337" width="97.77777777777779" height="73.33333333333334" fill="#f5ce9e" stroke="#986120" fill-opacity="1"/>
+<text x="738" y="450" font-size="17" fill="#172b46">PCB 140 × 100 mm / 散熱區 80 × 60 mm</text>
+<rect x="55" y="510" width="18" height="18" fill="#c2d0dd" stroke="none" fill-opacity="1"/>
+<text x="86" y="525" font-size="18" fill="#172b46">機殼空間</text>
+<rect x="290" y="510" width="18" height="18" fill="#23a17b" stroke="none" fill-opacity="1"/>
+<text x="321" y="525" font-size="18" fill="#172b46">PCB 占位（尚無走線）</text>
+<rect x="650" y="510" width="18" height="18" fill="#efab57" stroke="none" fill-opacity="1"/>
+<text x="681" y="525" font-size="18" fill="#172b46">散熱器占位（高 35 mm）</text>
+<text x="55" y="573" font-size="18" fill="#172b46">所有尺寸均為占位假設；接頭、固定孔、通風、元件高度與加工公差尚待設計。</text>
+<text x="55" y="607" font-size="18" fill="#172b46">圖中散熱區尚未建立與晶片的實際接觸；此圖不能作為製造或散熱驗證依據。</text>
+<text x="55" y="656" font-size="15" fill="#52647a">依 enclosure-concept.scad 尺寸繪製的投影示意 · 非 OpenSCAD 渲染</text>
+</g></svg>
