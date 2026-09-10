@@ -18,6 +18,8 @@ Trigger 關機會進入待機：功率級 48V 關閉，外部電源與 12V 待�
 
 ## 機殼空間預覽
 
+機箱建議採用 **現成鋁機箱＋客製前後面板**，見[現成候選與製作方式](mechanical/機箱選擇.md)。尚未定案或採購，下圖是早期占位。
+
 ![V0.1 機殼空間配置草案](mechanical/enclosure-preview.png)
 
 [放大看圖與說明](mechanical/README.md) · [系統方塊圖](docs/V0.1_設計規格.md#系統方塊圖)
