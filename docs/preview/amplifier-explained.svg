@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1380" viewBox="0 0 1600 1380" role="img" aria-labelledby="title desc">
+  <title id="title">你的後級，成品會怎麼用？</title>
+  <desc id="desc">Z10 前級透過音樂線連接後級，後級透過喇叭線連接左右喇叭。後級只接一條市電電源線，機內包含主電源、待機電源與擴大電路。額外的 Trigger 線讓 AUTO 模式跟隨前級開機或待機。這是功能示意，尚未完成實機。</desc>
+  <defs>
+    <style>
+      text { font-family: "Noto Sans CJK TC", "Noto Sans TC", sans-serif; fill: #193047; }
+      .title { font-size: 46px; font-weight: 700; }
+      .section { font-size: 30px; font-weight: 700; }
+      .label { font-size: 26px; font-weight: 700; }
+      .body { font-size: 24px; }
+      .small { font-size: 21px; }
+      .muted { fill: #52687b; }
+      .white { fill: #fff; }
+      .blue { fill: #216bb5; }
+      .purple { fill: #7850a5; }
+      .orange { fill: #a75b0c; }
+      .green { fill: #217653; }
+    </style>
+    <marker id="blue-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#216bb5"/></marker>
+    <marker id="purple-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#7850a5"/></marker>
+    <marker id="orange-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#bd741c"/></marker>
+  </defs>
+  <rect width="1600" height="1380" fill="#f2f5f7"/>
+  <text x="56" y="76" class="title">你的後級，成品會怎麼用？</text>
+  <text x="58" y="118" class="body muted">先看你會接的線、機箱裡的東西，以及每天怎麼操作。</text>
+
+  <rect x="40" y="150" width="1520" height="456" rx="24" fill="#fff" stroke="#d2dde5" stroke-width="2"/>
+  <text x="68" y="196" class="section">① 音樂走這條路</text>
+  <text x="68" y="232" class="small muted">接線關係示意；插孔在機背，面板外觀尚未定案。</text>
+
+  <rect x="86" y="277" width="300" height="117" rx="14" fill="#344657"/>
+  <rect x="104" y="294" width="116" height="51" rx="5" fill="#142733"/>
+  <path d="M115 322 H128 L135 309 L145 333 L154 317 H207" fill="none" stroke="#a8cde5" stroke-width="3"/>
+  <circle cx="342" cy="321" r="22" fill="#acb8c0"/>
+  <text x="105" y="376" class="label white">你的 Z10 前級</text>
+  <text x="105" y="426" class="body">接收音樂、調音量</text>
+
+  <path d="M386 315 H620" fill="none" stroke="#216bb5" stroke-width="5" marker-end="url(#blue-arrow)"/>
+  <text x="502" y="278" text-anchor="middle" class="label blue">音樂線</text>
+  <text x="502" y="348" text-anchor="middle" class="small blue">XLR 左右各一條</text>
+  <text x="502" y="377" text-anchor="middle" class="small muted">也保留 RCA 輸入</text>
+
+  <path d="M635 268 H1020 L1040 287 H620 Z" fill="#6e7f8c"/>
+  <rect x="620" y="287" width="420" height="121" rx="11" fill="#344657"/>
+  <rect x="655" y="408" width="49" height="10" rx="3" fill="#263947"/>
+  <rect x="956" y="408" width="49" height="10" rx="3" fill="#263947"/>
+  <text x="830" y="339" text-anchor="middle" class="section white">我們正在設計的後級</text>
+  <text x="830" y="378" text-anchor="middle" class="body white">把音樂訊號放大，推動喇叭</text>
+
+  <path d="M1040 315 H1220" fill="none" stroke="#216bb5" stroke-width="5" marker-end="url(#blue-arrow)"/>
+  <text x="1123" y="278" text-anchor="middle" class="label blue">喇叭線</text>
+  <text x="1123" y="351" text-anchor="middle" class="small blue">左右各一組</text>
+  <g fill="#344657" stroke="#263947" stroke-width="2">
+    <rect x="1236" y="257" width="106" height="145" rx="9"/>
+    <rect x="1383" y="257" width="106" height="145" rx="9"/>
+  </g>
+  <g fill="#aab9c5" stroke="#142733" stroke-width="5">
+    <circle cx="1289" cy="294" r="15"/><circle cx="1289" cy="354" r="32"/>
+    <circle cx="1436" cy="294" r="15"/><circle cx="1436" cy="354" r="32"/>
+  </g>
+  <text x="1363" y="439" text-anchor="middle" class="label">你的左右喇叭</text>
+
+  <path d="M310 394 V480 H710 V413" fill="none" stroke="#7850a5" stroke-width="4" stroke-dasharray="9 7" marker-end="url(#purple-arrow)"/>
+  <text x="312" y="518" class="label purple">Trigger：通知後級開機／待機</text>
+  <text x="312" y="550" class="small muted">這條額外的控制線不傳音樂，也不供應後級用電。</text>
+
+  <path d="M1000 505 V413" fill="none" stroke="#bd741c" stroke-width="5" marker-end="url(#orange-arrow)"/>
+  <rect x="970" y="508" width="60" height="64" rx="10" fill="#fff4e2" stroke="#bd741c" stroke-width="3"/>
+  <path d="M989 524 V542 M1011 524 V542 M1000 551 V560" stroke="#bd741c" stroke-width="4"/>
+  <text x="1050" y="525" class="label orange">牆壁插座 → 一條電源線</text>
+  <text x="1050" y="559" class="small muted">插到後級機背的電源入口。</text>
+
+  <rect x="40" y="630" width="1520" height="360" rx="24" fill="#fff" stroke="#d2dde5" stroke-width="2"/>
+  <text x="68" y="677" class="section">② 電源藏在機箱裡，主要分成這幾個部分</text>
+  <text x="68" y="713" class="small muted">下面只說明功能；大小、位置、散熱器與電路板數尚未定案。</text>
+  <rect x="66" y="737" width="1468" height="226" rx="17" fill="#edf1f4" stroke="#c3cfd8" stroke-width="2"/>
+
+  <rect x="88" y="756" width="400" height="188" rx="13" fill="#fff4e2" stroke="#d5ad78" stroke-width="2"/>
+  <text x="112" y="798" class="label orange">主電源</text>
+  <text x="112" y="839" class="body">把插座的電轉成</text>
+  <text x="112" y="875" class="body">擴大電路需要的電。</text>
+  <text x="112" y="916" class="small muted">規劃提供 48V，負責主要用電。</text>
+
+  <rect x="510" y="756" width="400" height="188" rx="13" fill="#fff4e2" stroke="#d5ad78" stroke-width="2"/>
+  <text x="534" y="798" class="label orange">待機電源</text>
+  <text x="534" y="839" class="body">讓接收訊號和開關控制</text>
+  <text x="534" y="875" class="body">持續工作，等前級通知。</text>
+  <text x="534" y="916" class="small muted">規劃提供 12V，待機時仍供電。</text>
+
+  <rect x="932" y="756" width="580" height="188" rx="13" fill="#e6f4ed" stroke="#93baa7" stroke-width="2"/>
+  <text x="956" y="798" class="label green">擴大電路與開關控制</text>
+  <text x="956" y="839" class="body">接收音樂 → 放大 → 送往喇叭</text>
+  <text x="956" y="878" class="body">開機稍候才出聲，關機先靜音。</text>
+  <text x="956" y="916" class="small muted">這就是原理圖裡許多零件共同做的事。</text>
+
+  <rect x="40" y="1014" width="1520" height="286" rx="24" fill="#fff" stroke="#d2dde5" stroke-width="2"/>
+  <text x="68" y="1061" class="section">③ 前方規劃三段控制，音量交給 Z10</text>
+  <rect x="68" y="1082" width="472" height="131" rx="13" fill="#e6f4ed"/>
+  <text x="91" y="1121" class="label green">AUTO｜跟著前級</text>
+  <text x="91" y="1157" class="body">後方總開關開啟時，</text>
+  <text x="91" y="1189" class="body">跟隨 Trigger 開機／待機。</text>
+  <rect x="564" y="1082" width="472" height="131" rx="13" fill="#edf1f4"/>
+  <text x="587" y="1121" class="label">OFF｜待機</text>
+  <text x="587" y="1157" class="body">停止播放，不跟著前級啟動。</text>
+  <text x="587" y="1189" class="body">機內電源仍然有電。</text>
+  <rect x="1060" y="1082" width="472" height="131" rx="13" fill="#eaf2fb"/>
+  <text x="1083" y="1121" class="label blue">ON｜手動開機</text>
+  <text x="1083" y="1157" class="body">不需要 Trigger 的啟動指令。</text>
+  <text x="1083" y="1189" class="body">仍保留電源監測與開聲延遲。</text>
+  <text x="70" y="1258" class="body">待機仍耗電；後方總開關關閉後，前級無法喚醒後級。</text>
+  <text x="58" y="1340" class="small muted">目前是設計示意，尚未製成實機；Trigger 相容性與實際啟停仍待驗證。2026-09-11</text>
+</svg>
