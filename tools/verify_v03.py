@@ -88,7 +88,9 @@ def main():
         pins('D301',{1:'TRIG_RETURN',2:'TRIG_LED'})
         pins('U303',{1:'AUX_GOOD',2:'GND',3:'RUN_REQUEST',5:'SENSE_12V',6:'+3V3_CTRL'})
         pins('D302',{1:'HOLD_CHARGE',2:'HOLD_CAP'})
-        pins('D303',{1:'AUDIO_MR',2:'AUX_GOOD'})
+        # BAT54 SOT-23: physical pin 2 is NC; cathode is pin 3.
+        pins('D303',{1:'AUDIO_MR',3:'AUX_GOOD'})
+        assert len(groups[net('D303',2)])==1
         pins('U306',{1:'AUDIO_GOOD',2:'GND',3:'AUDIO_MR',4:'AUDIO_DELAY',5:'SENSE_PVDD',6:'+3V3_CTRL'})
         pins('U401',{1:'DC_PROTECTED',2:'DC_PROTECTED',3:'DC_PROTECTED',6:'DC_PROTECTED',
                      7:'EFUSE_UV',8:'EFUSE_OV',9:'GND',10:'EFUSE_DVDT',11:'EFUSE_ILIM',
@@ -273,7 +275,7 @@ def main():
                    f'- eFuse 48V 軟啟動名義 {slew:.3f}s；只計 940µF 主電容充電約 {charge_current:.3f}A。',
                    f'- MA5172-AE：50W/8Ω 加估算開關紋波後約 {coil_rms:.3f}Arms，每顆銅損約 {copper:.3f}W（25°C DCR 上限）。',
                    '電感計算不含磁芯損耗；45A 是原廠 10% 電感下降的典型條件，不是連續可用電流。',
-                   '尚無 PCB、DRC、實機電感溫升／保護試驗、Z10 Trigger 電壓與極性量測、功率開關熱驗證或整機音質實測。',
+                   'PCB 僅有未走線配置草案（見 ../pcb-draft/）；尚無完成的 PCB／製造 DRC、實機電感溫升／保護試驗、Z10 Trigger 電壓與極性量測、功率開關熱驗證或整機音質實測。',
                    '資料來源與設計限制見 [V0.3 設計說明](../../docs/V0.3_設計說明.md)。']
         (EL/'validation.md').write_text('\n'.join(report)+'\n')
         print('\n'.join(report[:6]));print(f'Input sensitivity {sensitivities}; delay {delay:.3f}s; hold >= {holdmin:.3f}s')

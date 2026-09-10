@@ -376,7 +376,8 @@ C305,2,~,GND,dc-switch
 R313,1,~,+3V3_CTRL,dc-switch
 R313,2,~,AUDIO_MR,dc-switch
 D303,1,A,AUDIO_MR,dc-switch
-D303,2,K,AUX_GOOD,dc-switch
+D303,2,NC,NC,dc-switch
+D303,3,K,AUX_GOOD,dc-switch
 R314,1,~,+3V3_CTRL,dc-switch
 R314,2,~,AUDIO_GOOD,dc-switch
 U307,1,NC,NC,dc-switch

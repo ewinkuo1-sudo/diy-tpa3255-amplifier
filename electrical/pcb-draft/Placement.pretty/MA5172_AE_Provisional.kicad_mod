@@ -1,0 +1,189 @@
+(footprint "MA5172_AE_Provisional"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "Coilcraft Doc 943-1 body and pitch. 1.4mm finished hole and 3mm pad are provisional; tolerance and current review pending.")
+	(property "Reference" "REF**"
+		(at 0 -7.55 0)
+		(layer "F.SilkS")
+		(uuid "de143e9f-a85a-4edc-9e61-4d01aff45f49")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Value" "MA5172_AE_Provisional"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "be062513-d00a-4031-998c-05935fac12de")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "cf4fc104-9f0e-486b-9d53-1eb99f205ef5")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "8408b76a-3fdd-4b2e-85e6-d1720b748277")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -14.3 -6.15)
+		(end 14.3 -6.15)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "8a817578-cab3-4322-b055-a10d0d977185")
+	)
+	(fp_line
+		(start -14.3 6.15)
+		(end -14.3 -6.15)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "c0a8729d-d9c5-4db8-beaf-b4a2c09ba3d1")
+	)
+	(fp_line
+		(start 14.3 -6.15)
+		(end 14.3 6.15)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "a296a7bd-09dc-4b1e-a2c6-34c0dd55fa31")
+	)
+	(fp_line
+		(start 14.3 6.15)
+		(end -14.3 6.15)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "50fa9d44-2bca-4894-a269-f0cbc6587452")
+	)
+	(fp_line
+		(start -14.8 -6.65)
+		(end 14.8 -6.65)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "d345625a-4530-4ae5-b649-166bf80e3858")
+	)
+	(fp_line
+		(start -14.8 6.65)
+		(end -14.8 -6.65)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "3cdc93e6-b5bf-44d8-9349-de0ad16dade3")
+	)
+	(fp_line
+		(start 14.8 -6.65)
+		(end 14.8 6.65)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "0e65c4ab-cd4b-4341-8ffd-2c73c3a39407")
+	)
+	(fp_line
+		(start 14.8 6.65)
+		(end -14.8 6.65)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.CrtYd")
+		(uuid "614d4008-5ced-4fd5-ada1-a34e7991ba08")
+	)
+	(fp_line
+		(start -14.3 -6.15)
+		(end 14.3 -6.15)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "477a4568-370c-4b2a-af04-312c2cef9fff")
+	)
+	(fp_line
+		(start -14.3 6.15)
+		(end -14.3 -6.15)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "de06421d-29dc-4fce-ab67-170ee2476bbc")
+	)
+	(fp_line
+		(start 14.3 -6.15)
+		(end 14.3 6.15)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "cdea60ea-0067-41e5-8a9f-6c47f837a900")
+	)
+	(fp_line
+		(start 14.3 6.15)
+		(end -14.3 6.15)
+		(stroke
+			(width 0.12)
+			(type default)
+		)
+		(layer "F.Fab")
+		(uuid "d44c8f93-547f-418f-90ec-ae22f787663d")
+	)
+	(pad "1" thru_hole circle
+		(at -5 0)
+		(size 3 3)
+		(drill 1.4)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "ed692f42-c522-4aeb-9b9d-842287e029c2")
+	)
+	(pad "2" thru_hole circle
+		(at 5 0)
+		(size 3 3)
+		(drill 1.4)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "f1614970-6d86-479d-98b4-772302db57cd")
+	)
+	(embedded_fonts no)
+)

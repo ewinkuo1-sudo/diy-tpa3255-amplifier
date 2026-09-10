@@ -12,10 +12,12 @@ AI 應用課程，可含電路、材料、PCB 與 3D 設計；期限、預算、
 
 使用者表示看不懂電路圖。後續說明先用成品接線、用途與操作介紹，再提供零件細節；首頁已先放 `docs/使用方式圖解.md` 的中文圖解（SVG／PNG），說明 Z10、後級、喇叭、機內電源與 Trigger。這是功能示意，不是定案面板、板數、配置或比例圖。
 
+最新要求開始 PCB；已完成第一份未走線配置草案。可以先做配置與封裝審查，不需要等到實機音質量測後才能開始；正式走線／製板仍須處理下述電路與熱設計問題。
+
 ## 目前成果：V0.3 原理圖草案
 
 - `electrical/v03/tpa3255-v03.kicad_pro`：八頁原理圖，依序為功率級、訊號驅動、類比供電、PFFB、Trigger、主電源開關、控制供電、XLR 輸入。
-- `electrical/v03/README.md`：八頁 PNG／SVG／PDF 看圖入口；首頁放 XLR 頁。180 個元件，全部 footprint 尚未指定。
+- `electrical/v03/README.md`：八頁 PNG／SVG／PDF 看圖入口；首頁仍有 XLR 頁。180 個元件；原理圖 Footprint 欄位仍空白，PCB 封裝候選另列，尚未定料放行。
 - `docs/V0.3_設計說明.md`：元件來源、訊號路徑、控制方式與限制；`docs/V0.3_PCB設計要求.md` 為下階段佈局要求。
 - L1–L4 選 Coilcraft MA5172-AE：10µH，25°C 最大 DCR 26mΩ；45A 是典型 10% 電感下降條件，不是連續額定。
 - 四路同臂 PFFB 採 TI SLAA788A TPA3255 範例起始值，SUM 在 AC 耦合前；輸出阻尼為 220nF + 1Ω，NE5532 回授補償 330pF。真實穩定裕度尚未驗證。
@@ -25,19 +27,30 @@ AI 應用課程，可含電路、材料、PCB 與 3D 設計；期限、預算、
 - Trigger 以 12V 名義、9–15V、tip 正／sleeve 負為待實測假設。Z10 手冊確認有 Trigger，但缺少完整電流、電平容差與極性資料。12V 設計負載約 1.6mA，不能引用其他機種 150mA 當成 Z10 規格。
 - J302 外接 AUTO／OFF／ON 的 SPDT 中心斷開開關。TPS3808 監測輔助電源與 PVDD；開機先升功率電源，再延遲開聲；關機先 RESET 靜音，再延後停止 eFuse。
 - 主電源以 TPS26631PWPR 切換、STPS5H100B 反接保護。eFuse 約 4.5A 名義限流，MODE 懸空選鎖定，軟啟動名義約 2.2s；F1 為 T5A／至少 80VDC 的規格占位，尚未選料號／協調曲線。
+- PCB 封裝核對修正 D303 BAT54：原兩腳邏輯符號改為 SOT-23 實體 1=AUDIO_MR（A）、2=NC、3=AUX_GOOD（K），功能方向不變；原理圖、符號庫、接線契約與檢查已同步。D301／D302 仍採邏輯 A=1、K=2，專用 DO-35 封裝已反轉標準庫編號以維持陰極帶正確。
 - 整機電源見 `electrical/system-power/README.md` 與方塊圖：單一 IEC 入口、交流保護／雙極總開關待選，機內 PS1 UHP-200-48 與 PS2 RS-15-12 為首輪候選，尚未採購。J201／J202 圖面文字已改為機內 DC 接點；音訊原理圖不含市電。
 - Trigger 關機為待機：只切功率級 48V；兩組機內 AC/DC 及 12V 類比／控制仍有電。後方總開關撤除兩組 AC/DC 的輸入。待機耗電未測，功率電容不會立即放空。
 - V0.2 圖面與模型保留於 `electrical/`、`simulation/` 上層，作為歷史基線。機殼仍是 V0.1 占位模型，尚未按電感／XLR／散熱器重新配置。
 
+## 新增：PCB 初步配置
+
+`electrical/pcb-draft/tpa3255-placement.kicad_pcb`／同名專案可直接用 KiCad 10 開啟。180 個電路元件（正面 127／背面 53）、4 個 NPTH 固定孔；暫用 220×160 mm、4 層、1.6 mm，尚無走線與覆銅。只包括低壓音訊與控制，機內 AC/DC 和市電線束另置。
+
+`placement.csv` 記錄初始配置／封裝候選／來源 SHA-256。主要 IC 封裝族與腳序已核對；其餘電容、電阻、F1／座和板端接頭多為占位，全部仍未放行製造。面板 XLR／RCA／Trigger 插座不是這些排針，線束與防呆接頭待選。初始位置定義在 `tools/build_pcb_draft.py`；CSV 是輸出記錄，改板檔後需同步更新，不能把 CSV 當成自動匯入來源。
+
+首頁已有中文 PCB 配置圖；`preview/top`、`bottom` 是 KiCad 原始預覽，背面以背面視角輸出。中文圖嵌入真實板檔匯出，不繪製虛構走線。散熱器與 12V 保護只預留框，尚未完成機構干涉／高度與熱路徑驗證。電源與訊號回路仍需縮短、重新微調配置。
+
 ## 驗證
 
-`python3 tools/verify_v03.py` 通過：KiCad 10.0.6 ERC 0 錯誤／0 警告（無排除）；180 元件、482 腳、119 nets 群組吻合預期，另以獨立實體腳位檢查 XLR、PFFB、電源及控制。
+`python3 tools/verify_v03.py` 通過：KiCad 10.0.6 ERC 0 錯誤／0 警告（無排除）；180 元件、483 腳、120 nets 群組吻合預期，另以獨立實體腳位檢查 XLR、PFFB、電源及控制。較前版多出 BAT54 實體 NC 腳及其獨立未接網路。
 
 ngspice 47 執行 12 組 RCA／XLR AC 模型（4Ω、8Ω、空載 × 功率級無限頻寬／自訂 100kHz 極點）與 2 組共模模型。50W/8Ω 名義靈敏度約 RCA 2.126Vrms、XLR 差動 4.268Vrms；按 Z10 2.5／5Vrms 驅動，三個檢查頻率的輸出差異均小於 0.1dB。
 
 9 個控制時序規格模型涵蓋正常開關、任一電源缺失、5ms Trigger 脈衝、主／輔助電源掉壓、eFuse 鎖定，以及新增的兩路電源啟動順序互換。後兩者用 1s／3s 階躍作測試刺激，非廠商波形。腳位與阻容核算不能當成實際半導體或市電驗證。數據及原始模型位於 `simulation/v03/`。
 
-運放及 INA2137 內部比例仍理想化，TPA3255 只有線性增益源，100kHz 極點是自行假設；未驗證 PWM 延遲、真實 CMRR、噪聲、THD、迴路穩定裕度或偏壓建立爆音。已檢視圖面預覽；尚無 PCB、DRC、Gerber、整機 EMI／熱或實測。
+運放及 INA2137 內部比例仍理想化，TPA3255 只有線性增益源，100kHz 極點是自行假設；未驗證 PWM 延遲、真實 CMRR、噪聲、THD、迴路穩定裕度或偏壓建立爆音。已檢視圖面預覽；PCB 未走線，沒有 Gerber、整機 EMI／熱或實測。
+
+`python3 tools/verify_pcb_draft.py` 通過：483 個電氣腳號／484 個編號銅焊盤（DPAK 腳與 tab 共用 2）、120 nets 與原理圖及接線契約吻合。符號 UUID、關鍵封裝腳位、通孔阻焊開口、焊盤位於板內均檢查；幾何／封裝 DRC 0 違規，**仍有 364 項未連接**，保留在 `drc.json`，不能稱為完整製造 DRC 通過。KiCad 10.0.6 獨立 Python API 對舊式 THT 封裝寫出阻焊層有差異，生成器已在原生檔案宣告中補回，驗證會重新載入確認；不得移除此檢查。
 
 使用方式圖解僅更新文件與預覽，未改電路；檢查 SVG 格式、中文排版及文件連結，不重跑電路模型。
 
@@ -51,7 +64,7 @@ ngspice 47 執行 12 組 RCA／XLR AC 模型（4Ω、8Ω、空載 × 功率級�
 2. 審查 XLR 單電源擺幅／共模範圍、配對電容及訊源阻抗影響、REF 雜訊、上電偏壓建立與插拔／切換靜音；選 XLR 母座與後板佈局。
 3. 確認 Z10 Trigger 電壓、極性與帶載能力，驗證正常及突然掉電時序；關機 RC 的 0.071–0.983s 是工程包絡，不是保證閾值。
 4. 核定 48V 穩壓供電、12V 輸入保護、保險絲協調、eFuse／反接二極體散熱、電感磁芯損耗、其他料號與全部 footprint。
-5. 完成以上審查後進入 PCB 與機構，預留 XLR、RCA、絕緣 Trigger 與 AUTO／OFF／ON 操作介面。
+5. 以現有 PCB 配置為起點；定料後回填原理圖 Footprint，核對與板檔同步方式，再逐區佈線與覆銅，同步安排機箱、散熱器和面板線束。預留 XLR、RCA、絕緣 Trigger 與 AUTO／OFF／ON 操作介面。
 
 ## 工具與更新方法
 
@@ -60,8 +73,12 @@ ngspice 47 執行 12 組 RCA／XLR AC 模型（4Ω、8Ω、空載 × 功率級�
 ```sh
 python3 tools/verify_v03.py
 python3 tools/export_schematic.py electrical/v03/tpa3255-v03.kicad_sch
+python3 tools/verify_pcb_draft.py
+python3 tools/export_pcb_draft.py
 ```
 
 `tools/build_schematic_v03.py` 可重建 V0.3 初始圖面，但會覆寫專案、八頁圖面、符號庫及預期接線表；人工修改後避免直接執行。更改生成器後需審查新接線，再驗證／匯出。KiCad 10 `sym-lib-table` 必須保留標準多行格式。
 
 舊 `tools/build_schematic.py`／`verify_electrical.py` 僅處理 V0.2；匯出工具未給參數時亦保留 V0.2 行為。
+
+`tools/build_pcb_draft.py` 只生成初始配置；已有板檔時預設拒絕覆寫，`--force` 會丟棄人工改動。正式接續 PCB 工作前先讀草案 README，避免重新生成覆寫。`Placement.pretty` 內 DO-35 衍生封裝沿用 KiCad CC BY-SA 4.0 與附加例外，附授權文件；其餘專案自訂占位沿用 MIT。

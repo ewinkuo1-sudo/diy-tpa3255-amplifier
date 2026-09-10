@@ -1,7 +1,8 @@
 """Generate the reviewable V0.3 eight-sheet KiCad schematic.
 
 Project-owned symbols use pin numbers checked against TI PDFs. KiCad exports and
-the netlist audit are required after generation. No PCB or footprints are assigned.
+the netlist audit are required after generation. PCB placement is a separate study;
+provisional footprints are not assigned to the schematic.
 """
 import csv
 import json
@@ -109,6 +110,7 @@ def box_symbol(name,left,right,reference='U'):
 
 box_symbol('VOS618A',[(1,'A','passive'),(2,'K','passive')],[(4,'C','open_collector'),(3,'E','passive')])
 box_symbol('PowerDiode',[(1,'A','passive'),(3,'NC','no_connect')],[(2,'K_TAB','passive')],'D')
+box_symbol('BAT54',[(1,'A','passive'),(2,'NC','no_connect')],[(3,'K','passive')],'D')
 for name in ['LVC1G14','LVC1G17']:
     box_symbol(name,[(1,'NC','no_connect'),(2,'A','input'),(3,'GND','power_in')],[(5,'VCC','power_in'),(4,'Y','output')])
 box_symbol('TPS3808',[(6,'VDD','power_in'),(5,'SENSE','input'),(3,'MR_N','input')],[(1,'RESET_N','open_collector'),(4,'CT','passive'),(2,'GND','power_in')])
@@ -159,7 +161,7 @@ class Sheet:
         if kind=='NE5532': properties=prop('Reference',ref+('' if unit==3 else ('A' if unit==1 else 'B')),x,y-9)+prop('Value',value,x,y-6.8)
         # Actual Reference must not include unit suffix; KiCad displays it.
         if kind=='NE5532': properties=prop('Reference',ref,x,y-9)+prop('Value',value,x,y-6.8)
-        if kind in ['TPS3808','LVC1G14','LVC1G17','VOS618A','TPS26631','PowerDiode','INA2137']:
+        if kind in ['TPS3808','LVC1G14','LVC1G17','VOS618A','TPS26631','PowerDiode','BAT54','INA2137']:
             h=max(abs(p[4]) for p in PINS[kind][unit])
             properties=prop('Reference',ref,x,y-h-8)+prop('Value',value,x,y-h-5)
         properties+=prop('Footprint','',x,y,True)+prop('Datasheet',{'TPA3255':'https://www.ti.com/lit/ds/symlink/tpa3255.pdf','NE5532':'https://www.ti.com/lit/ds/symlink/ne5532.pdf','TLV76033':'https://www.ti.com/lit/ds/symlink/tlv760.pdf'}.get(kind,''),x,y,True)
@@ -190,7 +192,7 @@ class Sheet:
 
     def save(self):
         lib=''.join(LIB[k].replace('(symbol '+q(k), '(symbol '+q('Project:'+k),1) for k in sorted(self.used))
-        content=f'(kicad_sch(version 20250114)(generator "diy_tpa3255")(uuid {self.uuid})(paper "A3")(title_block(title {q("TPA3255 V0.3 / "+self.name)})(date "2026-09-11")(rev "0.3 REVIEW")(comment 1 "Electrical draft - no PCB / footprints / hardware validation"))(lib_symbols {lib})'
+        content=f'(kicad_sch(version 20250114)(generator "diy_tpa3255")(uuid {self.uuid})(paper "A3")(title_block(title {q("TPA3255 V0.3 / "+self.name)})(date "2026-09-11")(rev "0.3 REVIEW")(comment 1 "Electrical draft - footprints pending / no routing or hardware validation"))(lib_symbols {lib})'
         content+=''.join(self.items)
         if self.name==PROJECT: content+='(sheet_instances(path "/"(page "1")))'
         (DEST/(self.name+'.kicad_sch')).write_text(content+')\n')
@@ -382,7 +384,7 @@ def finish():
     dc.two('R','R312','10k / 0.1%',144,182,'SENSE_PVDD','GND')
     dc.two('C','C305','180n / 5% C0G',54,258,'AUDIO_DELAY','GND')
     dc.two('R','R313','10k',196,185,'+3V3_CTRL','AUDIO_MR')
-    dc.two('Diode','D303','BAT54',302,185,'AUDIO_MR','AUX_GOOD')
+    dc.part('BAT54','D303','BAT54',302,185,{'1':'AUDIO_MR','2':None,'3':'AUX_GOOD'})
     dc.two('R','R314','10k',192,211,'+3V3_CTRL','AUDIO_GOOD')
     dc.part('LVC1G17','U307','SN74LVC1G17DBVR',274,227,{'1':None,'2':'AUDIO_GOOD','3':'GND','4':'RESET_DRIVE','5':'+3V3_CTRL'})
     dc.two('R','R301','1k / 1%',371,216,'RESET_DRIVE','RESET_N')
