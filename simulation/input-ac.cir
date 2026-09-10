@@ -1,0 +1,52 @@
+TPA3255 V0.2 input AC model from audited KiCad netlist
+* Ideal finite-gain opamps; no NE5532 noise, clipping or bandwidth model.
+VMID n49 0 DC 6
+VL n25 0 DC 0 AC 1
+VR n42 0 DC 0 AC 1
+C101 n25 n26 10u
+C102 n28 n23 22p
+C103 n29 n24 22p
+C121 n42 n27 10u
+C122 n30 n40 22p
+C123 n31 n41 22p
+C150 n23 n3 10u
+C151 n24 n4 10u
+C152 n40 n5 10u
+C153 n41 n6 10u
+C154 n19 0 100p
+C155 n20 0 100p
+C156 n21 0 100p
+C157 n22 0 100p
+R101 n25 0 100k
+R102 n26 n28 24.9k
+R103 n28 n23 10k
+R104 n23 n29 10k
+R105 n29 n24 10k
+R121 n42 0 100k
+R122 n27 n30 24.9k
+R123 n30 n40 10k
+R124 n40 n31 10k
+R125 n31 n41 10k
+R150 n3 n19 100
+R151 n4 n20 100
+R152 n5 n21 100
+R153 n6 n22 100
+EU2A n23 n49 n49 n28 1e6
+EU2B n24 n49 n49 n29 1e6
+EU3A n40 n49 n49 n30 1e6
+EU3B n41 n49 n49 n31 1e6
+RLOAD_A n19 0 20k
+RLOAD_B n20 0 20k
+RLOAD_C n21 0 20k
+RLOAD_D n22 0 20k
+.control
+set wr_singlescale
+set wr_vecnames
+set numdgt=12
+ac dec 200 1 100000
+let left = v(n19)-v(n20)
+let right = v(n21)-v(n22)
+wrdata input-ac.dat left right
+quit
+.endc
+.end

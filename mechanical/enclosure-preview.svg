@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
 <title>TPA3255 V0.1 機殼空間配置草案</title>
-<desc>左側為開蓋斜視示意，右側為俯視配置。灰色為機殼，綠色為 PCB 占位，橘色為散熱器占位。尚未完成電路、固定孔及熱設計。</desc>
+<desc>左側為開蓋斜視示意，右側為俯視配置。灰色為機殼，綠色為 PCB 占位，橘色為散熱器占位。尚未完成 PCB 佈局、固定孔及熱設計。</desc>
 <rect width="1200" height="700" fill="#f4f6fa"/>
 <g font-family="Noto Sans CJK TC, sans-serif" fill="#172b46">
 <text x="48" y="57" font-size="30" fill="#172b46">TPA3255 / V0.1 機殼空間配置</text>

@@ -1,35 +1,39 @@
 # TPA3255 接班進度
 
-更新：2026-09-10，Codex。
+更新：2026-09-10，Codex。儲存庫 `ewinkuo1-sudo/diy-tpa3255-amplifier`；本機 `~/.openclaw/workspace/diy-tpa3255-amplifier`。
 
-儲存庫：`ewinkuo1-sudo/diy-tpa3255-amplifier`。本機：`~/.openclaw/workspace/diy-tpa3255-amplifier`。
+## 使用者方向與同步約定
 
-## 使用者方向
+AI 應用課程，可含電路、材料與 3D 設計；期限、預算、設備未定。Purifi 在另一獨立專案。
+使用者要求每次完成並檢查後立即 commit / push 並回報；圖面一併提供首頁可看的預覽。推送前確認遠端進度，不覆寫其他協作者的提交。
 
-課程主題是用 AI 做任何事情，可包含 PCB、材料選用與 3D 設計；尚未表示老師強制要求實機。本專案為自畫 TPA3255 練習機；Purifi 自用主力後級已拆至另一儲存庫。期限、預算、設備未定。
+## 目前成果：V0.2 原理圖草案
 
-## 提交與同步約定
+- `electrical/tpa3255-v02.kicad_pro`：KiCad 10 專案，四頁原理圖（功率級、RCA 輸入、供電去耦、手動控制）。
+- `electrical/README.md`：PNG、SVG 與四頁 PDF 看圖入口，首頁已放 RCA 圖。
+- `electrical/Project.kicad_sym`：自建元件符號。U1 44-pin 已對照原廠圖面；BST 及重複功率輸出腳採 passive ERC 類型，另以 netlist 檢查連接。
+- `electrical/bom-draft.csv`：94 個元件的草案，全部 footprint 尚未定案；F1、功率元件額定與料號仍待選。
+- `simulation/`：由實際 KiCad netlist 建立的輸入級及 LC AC 模型、數據；不是 TPA3255 開關模型。
+- `docs/V0.2_電路設計.md`：來源、設計選擇、限制與後續工作。
+- 機殼仍是原 V0.1 占位模型，尚未依實際零件重新配置。
 
-使用者於 2026-09-10 明確要求：之後每次完成並檢查過的專案變更，立即 commit 並 push 到 GitHub，不需再次詢問。推送前確認遠端進度，保留其他協作者的提交；推送後確認同步成功並回報 commit。若推送失敗，明確回報尚未同步。
+## 驗證
 
-## 本輪成果
+`python3 tools/verify_electrical.py` 通過：KiCad 10.0.6 ERC 0 錯誤／0 警告（無排除）；94 元件、246 腳、56 nets 群組完全吻合預期；主／輔助電源、模式、bootstrap、內部穩壓與重複輸出腳已核對。ngspice 47 區塊模型與 RESET 漏電／電阻餘裕核算通過。
 
-- `docs/V0.1_設計規格.md`：暫定 48V 外接電源、雙 BTL、先以 2×50W/8Ω 為目標，全部仍待驗證。
-- 修正 `docs/01_電路設計.md` 中供電／增益等會誤導原理圖的描述；完整審查尚未結束。
-- `tools/power_budget.py` 與生成報告：可重算的理想需求估算。
-- `mechanical/enclosure-concept.scad`：參數化空間草案，未渲染、未驗證加工。
-- 新增 `mechanical/README.md` 看圖入口與 PNG／SVG 投影預覽，首頁已嵌圖。`tools/enclosure_preview.py` 讀取 SCAD 的尺寸產生矩形空間配置示意，不是 OpenSCAD 渲染；幾何形狀改動時需同步更新腳本。
+RCA 目標靈敏度約 2.106Vrms（理想前端 + 晶片典型增益，未含 LC 損耗）。目前 LC 的 8Ω / 20kHz 為 +0.809dB，待調整；每顆電感 DCR 0.05Ω 是模型假設。
+
+已檢視四頁 KiCad 圖面輸出。尚無 PCB、DRC、Gerber、元件封裝、整機 THD／EMI／熱或實測。
 
 ## 下一步
 
-1. 工具盤點：PATH 中未找到 kicad-cli、ngspice、FreeCAD/freecad、openscad；尚未安裝。
-2. 完整閱讀 TI 的 Typical Application 與 Layout Guidelines，對照原始 PDF 圖面核對符號腳號；PDF 文字擷取順序不可直接轉成 netlist。
-3. 建立 KiCad 原理圖，先確定供電、模式與控制，再做前端和濾波。
-4. 取得實際料號與尺寸，回填 BOM 與機構模型。
-5. `docs/00_專案總覽.md` 保留的舊預算與性能比較尚未重核。V0.1 目標不是已驗證性能。
+1. 調整 LC／確定頻響驗收，選定電感（含偏磁後電感、過流門檻與熱）及輸出電容。
+2. 完成自動供電監測、啟停及掉電靜音；現有 JP1 為實驗手動控制，不能保證 brownout 靜音。
+3. 設計電源輸入保護、湧流處理，選 F1、接頭與實際料號。
+4. 核對 footprint 與散熱器，再進入 PCB 與機構；目前不應直接製板。
 
-## 完成度邊界
+## 工具與更新方法
 
-驗證完成：`git diff --check` 通過；50W/8Ω 的電壓、電流、功率平衡與生成報告一致性核對通過。此為計算核對，非硬體測試。
-
-尚未做 SPICE、ERC、DRC、PCB、Gerber、實體測試或下單。BTL 保護不能直接沿用其他拓撲；機構占位尺寸不能當實際料件尺寸。
+本機已安裝 KiCad 10.0.6、kicad-library、ngspice 47；尚未安裝 OpenSCAD / FreeCAD。原廠資料表本機暫存於 `/tmp/tpa3255-reference`，持久來源連結列於設計文件。
+`tools/build_schematic.py` 可重建初始原理圖，但會覆寫 `.kicad_pro`、四頁圖面、自建符號與預期接線表；手動修改後使用 `tools/verify_electrical.py` 檢查並匯出，更新接線基線需另行審查。
+KiCad 10 的 `sym-lib-table` 採標準多行格式；壓成單行曾導致 library type UNINITIALIZED。`tools/export_schematic.py` 同步匯出 PDF、SVG、PNG 並整理行尾空白；指令見看圖入口。

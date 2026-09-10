@@ -1,0 +1,44 @@
+TPA3255 V0.2 differential output LC model from audited netlist
+* Ideal sources; 0.05-ohm DCR per inductor is an assumption.
+* Includes the schematic 1n shunts and 10n+3.3-ohm RC branches.
+VP4 drvP4 0 AC 0.5
+VN4 drvN4 0 AC 0.5 180
+RDCRA4 drvP4 n33_4 0.05
+RDCRB4 drvN4 n34_4 0.05
+L1_4 n33_4 n43_4 10u
+L2_4 n34_4 n44_4 10u
+C5_4 n43_4 0 1u
+C6_4 n44_4 0 1u
+C9_4 n43_4 0 1n
+C10_4 n44_4 0 1n
+C13_4 n43_4 n50_4 10n
+C14_4 n44_4 n51_4 10n
+R1_4 n50_4 0 3.3
+R2_4 n51_4 0 3.3
+RLOAD4 n43_4 n44_4 4
+VP8 drvP8 0 AC 0.5
+VN8 drvN8 0 AC 0.5 180
+RDCRA8 drvP8 n33_8 0.05
+RDCRB8 drvN8 n34_8 0.05
+L1_8 n33_8 n43_8 10u
+L2_8 n34_8 n44_8 10u
+C5_8 n43_8 0 1u
+C6_8 n44_8 0 1u
+C9_8 n43_8 0 1n
+C10_8 n44_8 0 1n
+C13_8 n43_8 n50_8 10n
+C14_8 n44_8 n51_8 10n
+R1_8 n50_8 0 3.3
+R2_8 n51_8 0 3.3
+RLOAD8 n43_8 n44_8 8
+.control
+set wr_singlescale
+set wr_vecnames
+set numdgt=12
+ac dec 200 1 100000
+let load4 = v(n43_4)-v(n44_4)
+let load8 = v(n43_8)-v(n44_8)
+wrdata filter-ac.dat load4 load8
+quit
+.endc
+.end
