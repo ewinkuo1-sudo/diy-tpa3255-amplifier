@@ -293,6 +293,10 @@ def check_sequence(val,aux_threshold,pv_threshold,audio_delay,ramp_time,hold_tim
         'brownout_48v':lambda t:(t>1,12,30 if 6<t<6.5 else 48,False),
         'brownout_12v':lambda t:(t>1,10 if 6<t<6.5 else 12,48,False),
         'efuse_latch':lambda t:(1<t<7 or t>8,12,48,6<t<6.1),
+        # Two independent internal AC/DC modules may establish their rails in
+        # either order. Step timings are test stimuli, not vendor waveforms.
+        'psu_48v_late':lambda t:(t>0,12 if t>=1 else 0,48 if t>=3 else 0,False),
+        'psu_12v_late':lambda t:(t>0,12 if t>=3 else 0,48 if t>=1 else 0,False),
     }
     for name,event in cases.items():
         dt=.001;aux_timer=0;audio_timer=0;hold=0;pv=0;latched=False;enabled=False;was_audio=False
@@ -320,6 +324,7 @@ def check_sequence(val,aux_threshold,pv_threshold,audio_delay,ramp_time,hold_tim
             if step%10==0:rows.append([round(t,3),int(request),v12,vin,int(auxgood),int(enabled),round(pv,4),int(audio),int(latched)])
         if name in ['missing_48v','missing_12v','trigger_bounce']:assert not turnons
         elif name=='normal':assert len(turnons)==1 and turnons[0]>1+audio_delay
+        elif name.startswith('psu_'):assert len(turnons)==1 and turnons[0]>=3+ramp_time+audio_delay-.01,(name,turnons)
         else:assert len(turnons)==2,(name,turnons)
         if name=='efuse_latch':assert turnons[1]>8+audio_delay
         write_csv(SIM/('sequence-'+name+'.csv'),['time_s','request','aux_v','input_v','aux_good','power_enable','pvdd_v','audio_run','efuse_latched'],rows)

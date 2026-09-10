@@ -279,7 +279,7 @@ def build():
     pwr=Sheet('power-control','3')
     pwr.text(15,15,'12V STANDBY / LOCAL DECOUPLING',2.5)
     pwr.text(15,23,'PVDD comes from dc-switch sheet. 12V standby remains on; no mains wiring on this PCB.',1.5)
-    pwr.part('Conn2','J202','12V STANDBY INPUT',30,82,{'1':'+12V','2':'GND'})
+    pwr.part('Conn2','J202','INTERNAL 12V INPUT',30,82,{'1':'+12V','2':'GND'})
     for i,net in enumerate(['+12V','GND']):
         pwr.part('Flag','#FLG'+str(i+1),'PWR_FLAG',145,40+i*12.7,{'1':net})
     for i in range(4):
@@ -356,8 +356,8 @@ def finish():
 
     dc=Sheet('dc-switch','6')
     dc.text(15,15,'SWITCHED 48V DC / SLEW LIMIT / POWER-GOOD / AUDIO RESET',2.2)
-    dc.text(15,23,'External regulated 48V source stays powered. Trigger-off disconnects PVDD; 12V standby remains on.',1.3)
-    dc.part('Conn2','J201','48V DC INPUT',30,48,{'1':'PVDD_IN','2':'GND'})
+    dc.text(15,23,'Internal AC/DC modules share one mains inlet. Trigger-off disconnects PVDD; 12V standby remains on.',1.3)
+    dc.part('Conn2','J201','INTERNAL 48V INPUT',30,48,{'1':'PVDD_IN','2':'GND'})
     dc.two('Fuse','F1','T5A / >=80VDC TBD MPN',104,45,'PVDD_IN','FUSED_48V')
     dc.part('PowerDiode','D401','STPS5H100B',192,48,{'1':'FUSED_48V','2':'DC_PROTECTED','3':None})
     dc.two('C','C401','1u / 100V X7R',293,42,'DC_PROTECTED','GND')

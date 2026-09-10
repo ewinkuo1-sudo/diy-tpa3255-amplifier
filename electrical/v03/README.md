@@ -2,6 +2,8 @@
 
 八頁同一電路，包含 XLR 平衡接收／RCA 選擇、PFFB、四顆 MA5172-AE，以及隔離 Trigger 控制與 48V 功率電源開關。已通過接線檢查及簡化模型驗證；尚無 PCB 或實機性能驗證。
 
+整機採[機內電源、單一市電入口](../system-power/README.md)。本資料夾八頁只包含低壓音訊與控制；J201／J202 為機內供電接點，市電區另行規劃，沒有包含在本版 ERC／模型驗證內。
+
 **[下載八頁 PDF](preview/tpa3255-v03.pdf)** · [直接看 XLR 圖](preview/tpa3255-v03-xlr-input.png) · [中文設計說明](../../docs/V0.3_設計說明.md) · [驗證結果](validation.md) · [BOM 草案](bom-draft.csv)
 
 ## 1. 功率級與輸出電感

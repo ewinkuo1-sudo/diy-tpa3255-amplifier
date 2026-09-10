@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="980" viewBox="0 0 1440 980">
+<title>TPA3255 機內電源架構：一條市電電源線</title>
+<desc>單一 IEC 電源入口經交流保護與總開關，供應機內的 48V 與 12V 電源。48V 經板上 eFuse 到功率級，12V 經待設計的保護供輸入電路與控制。Trigger 控制待機；保護地直接連接機箱。這是架構草案，非市電施工圖。</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="#526477"/></marker>
+<marker id="eartharrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#23835c"/></marker>
+</defs>
+<rect width="1440" height="980" fill="#f4f6fa"/>
+<g font-family="Noto Sans CJK TC, sans-serif" fill="#172b46">
+<text x="48" y="65" font-size="34" font-weight="700">機內電源 · 機背只接一條市電線</text>
+<text x="48" y="104" font-size="20" fill="#526477">TPA3255 / 2 × 50W 目標 / 系統架構草案 / 尚未完成市電施工與熱驗證</text>
+<rect x="36" y="139" width="1368" height="648" rx="18" fill="white" stroke="#cbd5e1" stroke-width="2"/>
+<text x="62" y="178" font-size="22" font-weight="700">後級機箱內</text>
+<rect x="64" y="211" width="573" height="343" rx="14" fill="#fff5e9" stroke="#dca65b"/>
+<text x="86" y="243" font-size="20" fill="#976423">市電及 AC/DC 電源區</text>
+<rect x="718" y="211" width="644" height="510" rx="14" fill="#eaf6f1" stroke="#88baa6"/>
+<text x="741" y="244" font-size="20" fill="#28644f">低壓直流區 · 音訊與控制 PCB</text>
+<g stroke="#526477" stroke-width="3" fill="none" marker-end="url(#arrow)">
+<path d="M274 310 H351 V304 H406"/>
+<path d="M351 310 V450 H406"/>
+<path d="M612 304 H756"/>
+<path d="M986 304 H1094"/>
+<path d="M612 450 H756"/>
+<path d="M986 450 H1094"/>
+<path d="M1177 494 V598 H997"/>
+<path d="M1119 665 H997"/>
+<path d="M872 588 V541 H1028 V373 H870 V346"/>
+</g>
+<g stroke="#a8b5c3" stroke-width="1.5">
+<rect x="89" y="270" width="185" height="80" rx="8" fill="#fff"/>
+<rect x="406" y="270" width="206" height="76" rx="8" fill="#fff"/>
+<rect x="406" y="411" width="206" height="83" rx="8" fill="#fff"/>
+<rect x="756" y="270" width="230" height="76" rx="8" fill="#fff"/>
+<rect x="1094" y="270" width="232" height="76" rx="8" fill="#fff"/>
+<rect x="756" y="411" width="230" height="83" rx="8" fill="#fff" stroke="#bf884a" stroke-dasharray="7 5"/>
+<rect x="1094" y="411" width="232" height="83" rx="8" fill="#fff"/>
+<rect x="756" y="588" width="241" height="103" rx="8" fill="#fff"/>
+<rect x="1119" y="621" width="207" height="70" rx="8" fill="#fff"/>
+</g>
+<g font-size="20" text-anchor="middle">
+<text x="181" y="301">IEC 電源入口</text><text x="181" y="331" font-size="17">交流保護＋總開關</text>
+<text x="509" y="300">PS1 · 48V 電源</text><text x="509" y="328" font-size="16">UHP-200-48 候選</text>
+<text x="509" y="442">PS2 · 12V 電源</text><text x="509" y="472" font-size="16">RS-15-12 候選</text>
+<text x="870" y="300">板上保護與 eFuse</text><text x="870" y="328" font-size="16">經 J201 機內接點</text>
+<text x="1210" y="300">功率級</text><text x="1210" y="328" font-size="16">TPA3255 / LC / 喇叭</text>
+<text x="870" y="443">12V 入口保護</text><text x="870" y="474" font-size="17" fill="#976423">待設計</text>
+<text x="1210" y="443">J202 / 輸入與控制</text><text x="1210" y="474" font-size="16">總開關開啟時持續供電</text>
+<text x="876" y="620">Trigger 接收與電源監測</text><text x="876" y="649" font-size="17">先靜音，再停止功率供電</text><text x="876" y="677" font-size="16">AUTO / OFF / ON</text>
+<text x="1222" y="649">Z10 Trigger</text><text x="1222" y="676" font-size="16">控制訊號，非供電來源</text>
+</g>
+<text x="651" y="291" font-size="18">48V</text><text x="651" y="438" font-size="18">12V</text>
+<text x="83" y="389" font-size="18" fill="#976423">入口、開關與保險絲料號待選</text>
+<text x="83" y="580" font-size="18">兩組電源均在機內，共用一個電源入口。</text>
+<text x="83" y="613" font-size="18">Trigger 待機時，兩組 AC/DC 仍有電。</text>
+<text x="83" y="646" font-size="18">機箱尺寸與散熱底板需要重新配置。</text>
+<path d="M89 330 H55 V737 H1100" stroke="#23835c" stroke-width="4" fill="none" marker-end="url(#eartharrow)"/>
+<rect x="256" y="718" width="610" height="35" fill="white"/>
+<text x="271" y="742" font-size="18" fill="#23835c">PE 直接接機殼專用接地點，再接電源 FG；不經開關</text>
+<text x="1118" y="746" font-size="19" fill="#23835c">機殼／電源 FG</text>
+<text x="51" y="838" font-size="21" font-weight="700">已確定：一條市電線、機內雙電源、保留 Trigger 自動待機</text>
+<text x="51" y="878" font-size="19">待完成：交流保護與配線、12V 入口保護、散熱與機箱配置、接地／絕緣及實機量測</text>
+<text x="51" y="928" font-size="17" fill="#526477">功能方塊圖：箭頭不代表端子施工順序；分區線不代表已核定的電氣間隔。2026-09-11</text>
+</g></svg>
