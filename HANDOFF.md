@@ -1,6 +1,6 @@
 # TPA3255 接班進度
 
-更新：2026-09-11，Codex。儲存庫 `ewinkuo1-sudo/diy-tpa3255-amplifier`；本機 `~/.openclaw/workspace/diy-tpa3255-amplifier`。
+更新：2026-09-11，Codex。儲存庫 `ewinkuo1-sudo/diy-tpa3255-amplifier`；本次工作副本 `~/Projects/diy-tpa3255-amplifier`，原副本仍在 `~/.openclaw/workspace/diy-tpa3255-amplifier`。
 
 ## 使用者方向與同步約定
 
@@ -14,10 +14,32 @@ AI 應用課程，可含電路、材料、PCB 與 3D 設計；期限、預算、
 
 最新要求開始 PCB；已完成第一份未走線配置草案。可以先做配置與封裝審查，不需要等到實機音質量測後才能開始；正式走線／製板仍須處理下述電路與熱設計問題。
 
+最新回饋：教授認為八張電路圖太多，使用者要求合成一張。已新增 **A0 直式完整單頁總圖**，首頁與電路圖入口優先顯示總圖；原八頁 PNG 收在可展開區域。
+
+## 新增：教授審閱用單頁總圖
+
+- `electrical/v03/tpa3255-v03-overview.kicad_sch`／同名 `.kicad_pro`：一個原生 KiCad 頁面，直接合併目前八頁來源，不經初始生成器重建。中文分區、閱讀路徑、相同網路標籤連接說明；180 個元件完整保留。
+- `electrical/v03/preview/tpa3255-v03-overview.pdf`：A0 單頁靜態向量 PDF，適合直接傳給教授；同名 SVG 可放大、4800 像素寬 PNG 供首頁預覽。完整字樣需放大閱讀，縮印 A4 不適合。
+- `tools/build_schematic_overview.py`：只平移原圖位置、改為單頁實例路徑及重排標題／導覽，不改符號庫定義、元件參數或接線。遇到新增子頁、局部／階層標籤或不支援項目會拒絕合併，避免漏圖或意外連接。
+- `tools/verify_schematic_overview.py`／`electrical/v03/overview-validation.md`：來源及總圖各自匯出實際 netlist；180 元件、483 腳位、120 網路群組與接線契約一致，自訂網路名稱保留；原生符號 UUID、單元與屬性一致。兩版 ERC 均 0 錯誤／0 警告，無排除。KiCad XML 未完整列出跨頁運放電源單元的 UUID，因此 UUID 從原生圖檔逐單元比對。
+- `overview-sources.json` 記錄來源與總圖 SHA-256，檢查會擋下未同步的總圖。總圖的無標籤網路自動名稱／階層路徑會改變，故以腳位群組核對電氣等價。
+
+**八頁來源仍是電路與 PCB 維護主檔**；既有板檔 UUID 路徑對應原階層，不要用總圖直接更新現有 PCB。先改來源再重建總圖；總圖手改不會回寫來源，重建會覆寫衍生檔。此次沒有變更電路或 PCB，也沒有新增實機驗證。
+
+已檢查單頁 PDF 頁數／A0 尺寸、中文及電路細節、預覽邊界與文件連結；亦在暫存副本確認原版仍匯出八頁，且不改動現有總圖 SVG／PNG。本次只跑合併等價與 ERC 檢查，未重跑無變更的 AC／時序模型。
+
+```sh
+python3 tools/build_schematic_overview.py
+python3 tools/verify_schematic_overview.py
+python3 tools/export_schematic.py electrical/v03/tpa3255-v03-overview.kicad_sch --pdf-from-svg --png-width 4800
+```
+
+匯出工具先在暫存目錄產生 SVG，再更新這次實際輸出的檔案，避免八頁原版與總圖共用檔名前綴時誤覆寫彼此的 PNG。單頁 PDF 由 KiCad SVG 轉成向量 PDF，避免完整中文字庫使下載檔過大。
+
 ## 目前成果：V0.3 原理圖草案
 
 - `electrical/v03/tpa3255-v03.kicad_pro`：八頁原理圖，依序為功率級、訊號驅動、類比供電、PFFB、Trigger、主電源開關、控制供電、XLR 輸入。
-- `electrical/v03/README.md`：八頁 PNG／SVG／PDF 看圖入口；首頁仍有 XLR 頁。180 個元件；原理圖 Footprint 欄位仍空白，PCB 封裝候選另列，尚未定料放行。
+- `electrical/v03/README.md`：單頁總圖為預設看圖入口，原八頁 PNG／SVG／PDF 保留在可展開區域。180 個元件；原理圖 Footprint 欄位仍空白，PCB 封裝候選另列，尚未定料放行。
 - `docs/V0.3_設計說明.md`：元件來源、訊號路徑、控制方式與限制；`docs/V0.3_PCB設計要求.md` 為下階段佈局要求。
 - L1–L4 選 Coilcraft MA5172-AE：10µH，25°C 最大 DCR 26mΩ；45A 是典型 10% 電感下降條件，不是連續額定。
 - 四路同臂 PFFB 採 TI SLAA788A TPA3255 範例起始值，SUM 在 AC 耦合前；輸出阻尼為 220nF + 1Ω，NE5532 回授補償 330pF。真實穩定裕度尚未驗證。

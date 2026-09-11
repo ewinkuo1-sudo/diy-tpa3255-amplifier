@@ -1,0 +1,13 @@
+{
+  "sources": {
+    "control-supply.kicad_sch": "98487d0afef16d3026974348b8812933b09111e843218552191ca9e28f1b755b",
+    "dc-switch.kicad_sch": "abe78b92d520e8f22ef39aa209ef93ff4e8ce7b105cc129ff65ba4aa112f6bc6",
+    "feedback.kicad_sch": "a1d5dc84c79edc2d26bf2677b478e216f99c3be1aa3fd34ef5afdc9e56be4f71",
+    "input.kicad_sch": "dfa3384c74eeff6e4f12ec43d4c8b697c59e7839b5e5269f7ae1a94c50f9a621",
+    "power-control.kicad_sch": "bf819531f2891efbd927e1c154833503fa278258bd4ce4dc88824a55f8cb9d48",
+    "tpa3255-v03.kicad_sch": "3708b00486c92dc8506a51266d71de3fc9e9c18756f2df1bbb6c36fb4f313533",
+    "trigger.kicad_sch": "4cb04abe7c4643dee5e4f07fc4bf6170a33c3a17106a9385e03adfc02b7b4286",
+    "xlr-input.kicad_sch": "1b0a6c9390b21c63f023308be723d76c5942842f29b7c959a6c4099299ef2ee9"
+  },
+  "overview_sha256": "e76babf35f2e7915f626b784d770ae6fad7ebaa145accfff1d6e159e1dbd51a2"
+}

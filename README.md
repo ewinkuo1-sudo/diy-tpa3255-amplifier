@@ -12,7 +12,7 @@
 
 ## 目前進度
 
-V0.3 已加入 **XLR 平衡輸入並保留 RCA**，搭配濾波後回授（PFFB）、四顆 Coilcraft MA5172-AE，以及隔離 Trigger、自動啟停與 48V 功率電源開關。八頁 KiCad 原理圖及簡化模型已檢查。已開始 PCB 零件配置；以 2×50W / 8Ω 為第一階段目標，尚無完成的板子或實測。
+V0.3 已加入 **XLR 平衡輸入並保留 RCA**，搭配濾波後回授（PFFB）、四顆 Coilcraft MA5172-AE，以及隔離 Trigger、自動啟停與 48V 功率電源開關。原八頁電路已整合成 **一張完整總圖**，方便課堂與教授審閱；元件及接線與原版一致。已開始 PCB 零件配置；以 2×50W / 8Ω 為第一階段目標，尚無完成的板子或實測。
 
 XLR 使用 INA2137 差動接收器，依 Z10 的 XLR／RCA 電平匹配音量。第一版由左右聲道跳線選擇輸入，切換前先進入待機。
 
@@ -26,11 +26,15 @@ XLR 使用 INA2137 差動接收器，依 Z10 的 XLR／RCA 電平匹配音量。
 
 已放入 180 個元件與 4 個固定孔，暫抓 22×16 公分，尺寸與料件仍需調整。**尚未走線，不能送廠製作。** 先補電源保護、定料與散熱，再細調位置和走線。
 
-## 電路圖
+## 電路圖：一張看完整套電路
 
-![V0.3 XLR 平衡輸入與 RCA 選擇](electrical/v03/preview/tpa3255-v03-xlr-input.png)
+**[開啟／下載單頁 PDF](electrical/v03/preview/tpa3255-v03-overview.pdf)** · [放大 SVG](electrical/v03/preview/tpa3255-v03-overview.svg) · [看圖說明](electrical/v03/README.md) · [合併檢查](electrical/v03/overview-validation.md)
 
-**[查看 V0.3 八頁原理圖](electrical/v03/README.md)** · [放大 XLR 圖](electrical/v03/preview/tpa3255-v03-xlr-input.svg) · [下載 PDF](electrical/v03/preview/tpa3255-v03.pdf) · [中文設計說明](docs/V0.3_設計說明.md) · [驗證報告](electrical/v03/validation.md)
+![V0.3 完整單頁電路總圖](electrical/v03/preview/tpa3255-v03-overview.png)
+
+總圖採 **A0 直式單頁**，有中文分區與閱讀順序，180 個元件、483 個腳位、120 個網路完整保留；PDF／SVG 可放大看數值。建議直接把單頁 PDF 傳給教授，螢幕閱讀時放大；列印以 A0 原尺寸為佳，縮到 A4 文字會太小。同名網路標籤表示電氣相連。
+
+[中文設計說明](docs/V0.3_設計說明.md) · [電路／模型驗證報告](electrical/v03/validation.md) · [原八頁 PDF](electrical/v03/preview/tpa3255-v03.pdf)
 
 ## 整機電源與機箱
 
