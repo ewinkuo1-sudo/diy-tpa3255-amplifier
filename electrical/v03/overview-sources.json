@@ -9,5 +9,6 @@
     "trigger.kicad_sch": "4cb04abe7c4643dee5e4f07fc4bf6170a33c3a17106a9385e03adfc02b7b4286",
     "xlr-input.kicad_sch": "1b0a6c9390b21c63f023308be723d76c5942842f29b7c959a6c4099299ef2ee9"
   },
-  "overview_sha256": "e76babf35f2e7915f626b784d770ae6fad7ebaa145accfff1d6e159e1dbd51a2"
+  "overview_sha256": "be3c55ef55298ef3b658e52eba0bd761173fcacfd34a7d984f9dddaf04e83213",
+  "layout": "integrated-signal-flow"
 }

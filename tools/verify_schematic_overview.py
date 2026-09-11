@@ -7,7 +7,12 @@ import subprocess
 import tempfile
 import xml.etree.ElementTree as ET
 
-from build_schematic_overview import EL, MANIFEST, OUTPUT, child, children, parse, walk
+from build_schematic_overview import EL, MANIFEST, OUTPUT, child, children, dump, parse, walk
+
+
+def source_library(value):
+    """Overview is a presentation variant of two Project symbols."""
+    return value.replace('Overview:', 'Project:').replace('"Overview"', '"Project"')
 
 
 def run(*args):
@@ -23,7 +28,8 @@ def netlist(schematic, output):
     for c in root.findall("./components/comp"):
         components[c.attrib["ref"]] = (
             c.findtext("value"), c.findtext("footprint"), c.findtext("datasheet"),
-            tuple(sorted(c.find("libsource").attrib.items())),
+            tuple(sorted((k, 'Project' if k == 'lib' and v == 'Overview' else v)
+                         for k, v in c.find("libsource").attrib.items())),
         )
     groups = {}
     for net in root.findall("./nets/net"):
@@ -40,7 +46,7 @@ def main():
     assert hashlib.sha256(OUTPUT.read_bytes()).hexdigest() == manifest["overview_sha256"], "Overview was edited; rebuild from source"
     drawing = parse(OUTPUT.read_text())
     assert not children(drawing, "sheet"), "Overview must be one native sheet"
-    assert child(drawing, "paper") == ["paper", '"A0"', "portrait"]
+    assert child(drawing, "paper") == ["paper", '"A0"']
     assert len(children(drawing, "sheet_instances")) == 1
     # No duplicated UUIDs after flattening (including wires and global labels).
     uuids = [v[1] for v in walk(drawing) if v[0] == "uuid"]
@@ -54,13 +60,29 @@ def main():
                 uid = child(symbol, "uuid")[1]
                 assert uid not in result, uid
                 result[uid] = (
-                    child(symbol, "lib_id")[1], child(symbol, "unit")[1],
+                    source_library(child(symbol, "lib_id")[1]), child(symbol, "unit")[1],
                     tuple(sorted((p[1], p[2]) for p in children(symbol, "property"))),
                     tuple(child(symbol, key)[1] for key in ("in_bom", "on_board", "dnp")),
                 )
         return result
     source_trees = [parse((EL / name).read_text()) for name in manifest["sources"]]
     assert identities(source_trees) == identities([drawing]), "Symbol UUID/unit/properties changed"
+    # Functional pin placement changes only graphics/coordinates. Retain every
+    # pin's number, name, type, shape and owning unit, including no-connect pins.
+    def pin_semantics(trees):
+        result = {}
+        for tree in trees:
+            for symbol in children(child(tree, "lib_symbols"), "symbol"):
+                key = source_library(symbol[1])
+                units = {}
+                for unit in children(symbol, "symbol"):
+                    units[unit[1]] = sorted((p[1], p[2], child(p, "number")[1],
+                                            child(p, "name")[1])
+                                           for p in children(unit, "pin"))
+                assert key not in result or result[key] == units
+                result[key] = units
+        return result
+    assert pin_semantics(source_trees) == pin_semantics([drawing]), "Electrical symbol definition changed"
     contract = {}
     with (EL / "expected-connections.csv").open() as f:
         for row in csv.DictReader(f):
@@ -77,8 +99,28 @@ def main():
         # User-defined net names must survive; KiCad-generated paths for unnamed
         # local nets and NC pins naturally change when the hierarchy is flattened.
         for group, name in source_nets.items():
-            if not name.startswith(("/", "unconnected-(")):
-                assert name == merged_nets[group], (name, merged_nets[group])
+            if not name.startswith(("/", "Net-(", "unconnected-(")):
+                assert name == merged_nets[group].removeprefix('/'), (name, merged_nets[group])
+        # A flattened page using only matching labels would pass electrical
+        # equivalence. Remove labels and independently export once more to prove
+        # that the audio/feedback and main control paths really are drawn wires.
+        wired = [v for v in drawing if not (isinstance(v, list) and
+                 v[0] in {'label', 'global_label', 'hierarchical_label'})]
+        wired_path = temp / 'physical-wires.kicad_sch'
+        wired_path.write_text(dump(wired))
+        _, physical_groups = netlist(wired_path, temp / 'physical.xml')
+        continuous = {}
+        control_names = {'TRIG_TIP', 'TRIG_LED', 'TRIG_RETURN', 'TRIG_N',
+                         'AUTO_REQUEST', 'RUN_REQUEST', 'SENSE_12V', 'AUX_GOOD',
+                         'AUX_BUFFER', 'HOLD_CHARGE', 'HOLD_CAP', 'EFUSE_ENABLE',
+                         'EFUSE_SHDN', 'AUDIO_MR', 'SENSE_PVDD', 'AUDIO_GOOD',
+                         'AUDIO_DELAY', 'RESET_DRIVE', 'RESET_N'}
+        for name, nodes in contract.items():
+            group = frozenset(nodes)
+            if name.startswith(('L_', 'R_', 'SUM_', 'INPUT_', 'OUT_', 'SPK_',
+                                'BST_', 'Z_', 'FB_MID_')) or name in control_names:
+                assert group in physical_groups, (name, 'Path still depends on labels')
+                continuous[name] = group
         violations = {}
         for name, schematic in [("source", EL / "tpa3255-v03.kicad_sch"), ("overview", OUTPUT)]:
             report = temp / (name + "-erc.json")
@@ -89,12 +131,14 @@ def main():
             assert not violations[name], violations[name]
     pins = sum(len(group) for group in merged_nets)
     version = run("kicad-cli", "version").strip()
-    report = f"""# 單頁總圖合併檢查
+    report = f"""# 整合電路圖檢查
 
-- KiCad {version}；A0 直式、單一原生頁面，無子頁。
-- {len(merged)} 個元件的編號、數值、符號來源、Footprint／Datasheet 與符號 UUID 均與八頁來源一致。
+- KiCad {version}；A0 橫式、單一原生頁面，無子頁；依訊號與控制路徑重新排列。
+- {len(merged)} 個元件的編號、數值、Footprint／Datasheet、單元與符號 UUID 均與八頁來源一致。
+- U1／U601 使用獨立 Overview 圖形庫調整腳位排列；逐腳核對編號、名稱、電氣型態與所屬單元，其餘符號沿用原庫。
 - {pins} 個電氣腳位、{len(merged_nets)} 個網路群組與八頁來源及 `expected-connections.csv` 完全吻合。
-- 保留自訂網路名稱；KiCad 自動產生的無標籤網路路徑隨合併改變，以腳位群組比較確認等價。
+- 額外移除所有標籤再匯出接線表：{len(continuous)} 組音訊、四路回授及主要啟停控制網路仍完整相連，確認依靠實際導線連接。
+- 保留自訂標籤文字；改用單頁局部標籤，匯出名稱增加 `/` 前綴；以腳位群組比較確認等價。
 - 八頁來源及單頁總圖 ERC 均為 0 錯誤／0 警告，無排除項目；UUID 無重複。
 - `overview-sources.json` 記錄來源及總圖 SHA-256；來源變動而未重建時，檢查會失敗。
 
